@@ -25,7 +25,7 @@ func main() {
 	var port string = findPort()
 	fmt.Println("server starting on port", port)
 
-	serverHandler := func(writer http.ResponseWriter, request *http.Request) {
+	ServerHandler := func(writer http.ResponseWriter, request *http.Request) {
 		//echo
 		//requestdata data should be read before writing the response
 
