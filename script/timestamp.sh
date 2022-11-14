@@ -1,18 +1,22 @@
 # get timestamp
 time=$(date +%s)
-message=date -d @$(date -u +%s) 
+msg=$(date)
 
-# set url
-url=http://localhost:port/ 
+printf "time in seconds $time\n"
 
 # check if an hour has passed
-if ! ((TIME % 60))
+if ! (($time % 3600))
 then
-    message = "an hour has passed..."
+    msg="an hour has passed..."
 fi
 
-# create http request using curl
-curl -X POST ${url} -H 'Content-type: application/json' --data "{\"text\": \"${message}\"}"
+printf "message $msg \n"
 
-#conversion of dates
-#https://www.codegrepper.com/code-examples/shell/bash+script+get+unix+timestamp
+# set url
+#url=http://localhost:port/ 
+url=http://localhost:7893/
+
+# create http request using curl
+curl -X POST ${url} -H 'Content-type: application/json' --data "{\"text\": \"${msg}\"}"
+
+$SHELL
