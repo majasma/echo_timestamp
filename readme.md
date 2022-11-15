@@ -31,9 +31,17 @@ Linux does not use the concept of executables, so it is only necessary to run a 
 crontab -e 
 */1 * * * * /home/YOU/backup.sh (edit path)
 
+By default the script does not have the right permissions, this needs to be changed. 
+this is changed with chmod. 
+"chmod +x timestamp.sh"
+This changes the permissions so that any user could execute it without any additional permissions. 
+
+
 ### Todo:
 [ ] create script to schedule execution
 [x] retrieve unix time and date
 [x] implement check for full hour
 [x] send http request using curl
 [ ] store response to log-file
+[x] alter execute permissions
+[ ] check that permissions are changed for other devices as well
