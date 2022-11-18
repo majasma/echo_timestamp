@@ -14,9 +14,10 @@ printf "message $msg \n"
 
 # set url
 #url=http://localhost:port/ 
-url=http://localhost:7893/
+url=http://localhost:54321/
 
 # create http request using curl
-curl -X POST ${url} -H 'Content-type: application/json' --data "{\"text\": \"${msg}\"}"
+(curl -X POST ${url} -H 'Content-type: application/json' --data "{\"text\": \"${msg}\"}" ) >> client.log
+echo "" >> client.log
 
-$SHELL
+
