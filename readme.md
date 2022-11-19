@@ -9,10 +9,7 @@ to echo it use http://localhost:port/
 The server is set run on localhost, if it is set up on another device use http://"ipaddr":"port"/
 
 ### Todo:
- - [x] Find correct ports
- - [x] Decide format of response
- - [x] Implement a simple server
- - [ ] Create a shell script ect to run script at login  
+ - [ ] Start server on connection  
  - [ ] Shut down server at logout
 
 ### How to make it start at login?
@@ -64,23 +61,6 @@ To avoid path corrections, we want the script to run from a generic location. Ru
 sudo mv -i timestamp.sh /usr/local/bin
 to have it moved to /usr/local/bin. Log files are stored to /var/log/client.log
 
-### Todo:
-[x] create script to schedule execution
-[x] retrieve unix time and date
-[x] implement check for full hour
-[x] send http request using curl
-[x] store response to log-file
-[x] alter execute permissions
-[ ] check that permissions are changed for other devices as well
-[x] alter paths
-[ ] change timing to start on the minute
-
-Challenges:
-- Was not able to figure out how cron worked properly
-- When adding a startupscript I destroyed my entire virtual machine, with all of my work on, lesson learned:)
-- When adding the interpreter comment on the client script, the modulo operation does not work as this is c-based
-- When running with bash-spcific it cant interpret the c-translation
-
 ## Requirements
 ### Server
 - golang?
@@ -88,3 +68,11 @@ Challenges:
 ### Client
 - curl package
 - added files in the systemd-folder
+
+
+## Challenges:
+- Was not able to figure out how cron worked properly
+- When adding a startupscript I destroyed my entire virtual machine, with all of my work on, lesson learned:)
+- When adding the interpreter comment on the client script, the modulo operation does not work as this is c-based
+- When running with bash-spcific it cant interpret the c-translation
+
