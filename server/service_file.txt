@@ -2,4 +2,5 @@
 Description=Run the server timestamp echo service
 
 [Service]
+Type=oneshot
 ExecStart=/usr/local/bin/echo_server

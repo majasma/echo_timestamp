@@ -2,14 +2,11 @@
 ## Server
 
 ### How it works
-The ListenAndServe method starts a server at a given port. As the handler is set to nil, it uses the handler function added by HandleFunc. This function is defined as ServerHandler. ServerHandler sets the response header to StatusOK (200) and writes the request as a respond.
+The ListenAndServe method starts a server at a given port. As the handler is set to nil, it uses the handler function added by HandleFunc. This function is defined as ServerHandler. .
 
 to echo it use http://localhost:port/
 
 The server is set run on localhost, if it is set up on another device use http://"ipaddr":"port"/
-
-### Requirements:
- - go compiler
 
 ### Todo:
  - [x] Find correct ports
@@ -19,9 +16,7 @@ The server is set run on localhost, if it is set up on another device use http:/
  - [ ] Shut down server at logout
 
 ### How to make it start at login?
-adding the command to either ~/.profile or ~/.bashrc. bashrc would make it run every time a bash shell is started (probably not the solution). .profile is only run by interactive login shells. The /etc/profile contains Linux system wide environment and other startup scripts. Usually the default command line prompt is set in this file. It is used for all users logging in to the bash, ksh, or sh shells.
 
-bash equivalent to "go run main.go"
 
 ### ..and stop at logout?
 maybe https://www.cyberciti.biz/faq/linux-logout-user-howto/
@@ -42,6 +37,16 @@ For the timer
 run "sudo vim /etc/systemd/system/echo_timestamp.timer"
 and add the content of ./client/timer_file.txt
 
+In order to start the service:
+- sudo systemctl daemon-reload
+- sudo systemctl start echo_timestamp.timer
+
+To check if the service is running: journalctl -fu echo_timestamp.service
+
+To avoid path corrections, we want the script to run from a generic location. Run
+sudo mv -i timestamp.sh /usr/local/bin
+to have it moved to /usr/local/bin. Log files are stored to /var/log/client.log
+
 ### Todo:
 [x] create script to schedule execution
 [x] retrieve unix time and date
@@ -50,7 +55,7 @@ and add the content of ./client/timer_file.txt
 [x] store response to log-file
 [x] alter execute permissions
 [ ] check that permissions are changed for other devices as well
-[ ] alter paths
+[x] alter paths
 [ ] change timing to start on the minute
 
 Challenges:
@@ -61,7 +66,7 @@ Challenges:
 
 ## Requirements
 ### Server
-- golang
+- golang?
 
 ### Client
 - curl package

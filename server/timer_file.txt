@@ -2,7 +2,6 @@
 Description=server timestamp echo service timer
 
 [Timer]
-OnCalendar=*-*-* *:*:00
 Unit=server_echo_timestamp.service
 
 [Install]
