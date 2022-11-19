@@ -1,0 +1,9 @@
+[Unit]
+Description=client timestamp echo service timer
+
+[Timer]
+OnCalendar=*-*-* *:*:00
+Unit=echo_timestamp.service
+
+[Install]
+WantedBy=timers.target

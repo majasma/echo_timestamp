@@ -1,0 +1,5 @@
+[Unit]
+Description=Run the client timestamp echo service
+
+[Service]
+ExecStart=/home/majasma/echo_timestamp/client/timestamp.sh

@@ -27,26 +27,42 @@ bash equivalent to "go run main.go"
 maybe https://www.cyberciti.biz/faq/linux-logout-user-howto/
 
 ## Client script
-Linux does not use the concept of executables, so it is only necessary to run a shell script or similar. Crontab can be used to create a cron schedule. Commands
-crontab -e 
-*/1 * * * * /home/YOU/backup.sh (edit path)
+Linux does not use the concept of executables, so it is only necessary to run a shell script or similar. 
 
-By default the script does not have the right permissions, this needs to be changed. 
-this is changed with chmod. 
-"chmod +x timestamp.sh"
+By default the script does not have the right permissions, this needs to be changed. "chmod +x timestamp.sh"
 This changes the permissions so that any user could execute it without any additional permissions. 
 
+Systemd is used to run the script every minute. In order for it to run you need to add a service and a timer.
+
+For the service:
+run "sudo vim /etc/systemd/system/echo_timestamp.service"
+and add the content of ./client/service_file.txt
+
+For the timer
+run "sudo vim /etc/systemd/system/echo_timestamp.timer"
+and add the content of ./client/timer_file.txt
 
 ### Todo:
-[ ] create script to schedule execution
+[x] create script to schedule execution
 [x] retrieve unix time and date
 [x] implement check for full hour
 [x] send http request using curl
 [x] store response to log-file
 [x] alter execute permissions
 [ ] check that permissions are changed for other devices as well
+[ ] alter paths
+[ ] change timing to start on the minute
 
 Challenges:
 - Was not able to figure out how cron worked properly
 - When adding a startupscript I destroyed my entire virtual machine, with all of my work on, lesson learned:)
 - When adding the interpreter comment on the client script, the modulo operation does not work as this is c-based
+- When running with bash-spcific it cant interpret the c-translation
+
+## Requirements
+### Server
+- golang
+
+### Client
+- curl package
+- added files in the systemd-folder
