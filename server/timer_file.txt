@@ -1,8 +1,0 @@
-[Unit]
-Description=server timestamp echo service timer
-
-[Timer]
-Unit=server_echo_timestamp.service
-
-[Install]
-WantedBy=timers.target
