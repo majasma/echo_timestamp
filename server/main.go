@@ -4,16 +4,15 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"os"
 )
 
 
-const DefaultPort = "54321"
+const Port = "54321"
 
 
 func main() {
 
-	fmt.Println("Server starting on port", port)
+	fmt.Println("Server starting on port", Port)
 
 	ServerHandler := func(writer http.ResponseWriter, request *http.Request) {
 
@@ -30,6 +29,6 @@ func main() {
 
 	http.HandleFunc("/", ServerHandler)
 
-	http.ListenAndServe(":"+port, nil)
+	http.ListenAndServe(":"+Port, nil)
 
 }
