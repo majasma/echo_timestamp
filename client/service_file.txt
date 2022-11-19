@@ -2,4 +2,4 @@
 Description=Run the client timestamp echo service
 
 [Service]
-ExecStart=/home/majasma/echo_timestamp/client/timestamp.sh
+ExecStart=/usr/local/bin/timestamp.sh
