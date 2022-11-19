@@ -1,0 +1,5 @@
+[Unit]
+Description=Run the server timestamp echo service
+
+[Service]
+ExecStart=/usr/local/bin/echo_server
