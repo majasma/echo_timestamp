@@ -19,7 +19,7 @@ printf "message $msg \n"
 url=http://localhost:54321/
 
 # create http request using curl
-(curl -X POST ${url} -H 'Content-type: application/json' --data "{\"text\": \"${msg}\"}" ) >> /home/majasma/echo_timestamp/client/client.log
-echo "" >> /home/majasma/echo_timestamp/client/client.log
+(curl -X POST ${url} -H 'Content-type: application/json' --data "{\"text\": \"${msg}\"}" ) >> /var/log/client.log
+echo "" >> /var/log/client.log
 
 
