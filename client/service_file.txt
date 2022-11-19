@@ -3,3 +3,6 @@ Description=Run the client timestamp echo service
 
 [Service]
 ExecStart=/usr/local/bin/timestamp.sh
+
+[Install]
+WantedBy=multi-user.target

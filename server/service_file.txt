@@ -1,6 +1,10 @@
 [Unit]
 Description=Run the server timestamp echo service
+After=systemd-user-sessions.service
 
 [Service]
 Type=oneshot
 ExecStart=/usr/local/bin/echo_server
+
+[Install]
+WantedBy=multi-user.target

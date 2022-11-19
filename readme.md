@@ -18,13 +18,12 @@ The server is set run on localhost, if it is set up on another device use http:/
 ### How to make it start at login?
 Systemd is used to run the executable at login. In order for it to run you need to add a service.
 
-For the service:
-run "sudo vim /etc/systemd/system/server_echo_timestamp.service"
+run "sudo vim /etc/systemd/system/server_echo.service"
 and add the content of ./server/service_file.txt
 
 In order to start the service:
 - sudo systemctl daemon-reload
-- systemctl start server_echo_timestamp.service
+- systemctl enable server_echo_timestamp.service
 
 To check if the service is running: systemctl status server_echo_timestamp
 
@@ -32,7 +31,11 @@ To avoid path corrections, we want the script to run from a generic location. Ru
 sudo mv -i echo_server /usr/local/bin
 
 ### ..and stop at logout?
-maybe https://www.cyberciti.biz/faq/linux-logout-user-howto/
+cat etc/systemd/logind.conf,
+KillUserProcesses should be set to "yes". 
+
+sudo vim /etc/systemd/logind.conf
+
 
 ## Client script
 Linux does not use the concept of executables, so it is only necessary to run a shell script or similar. 
@@ -43,18 +46,19 @@ This changes the permissions so that any user could execute it without any addit
 Systemd is used to run the script every minute. In order for it to run you need to add a service and a timer.
 
 For the service:
-run "sudo vim /etc/systemd/system/echo_timestamp.service"
+run "sudo vim /etc/systemd/system/client_echo.service"
 and add the content of ./client/service_file.txt
 
 For the timer
-run "sudo vim /etc/systemd/system/echo_timestamp.timer"
+run "sudo vim /etc/systemd/system/client_echo.timer"
 and add the content of ./client/timer_file.txt
 
 In order to start the service:
 - systemctl daemon-reload
-- systemctl start echo_timestamp.timer
+- systemctl enable client_echo.timer
+- systemctl enable client_echo.service
 
-To check if the service is running: journalctl -fu echo_timestamp.service
+To check if the service is running: journalctl -fu client_echo.service
 
 To avoid path corrections, we want the script to run from a generic location. Run
 sudo mv -i timestamp.sh /usr/local/bin
