@@ -16,7 +16,20 @@ The server is set run on localhost, if it is set up on another device use http:/
  - [ ] Shut down server at logout
 
 ### How to make it start at login?
+Systemd is used to run the executable at login. In order for it to run you need to add a service.
 
+For the service:
+run "sudo vim /etc/systemd/system/server_echo_timestamp.service"
+and add the content of ./server/service_file.txt
+
+In order to start the service:
+- sudo systemctl daemon-reload
+- systemctl start server_echo_timestamp.service
+
+To check if the service is running: systemctl status server_echo_timestamp
+
+To avoid path corrections, we want the script to run from a generic location. Run
+sudo mv -i echo_server /usr/local/bin
 
 ### ..and stop at logout?
 maybe https://www.cyberciti.biz/faq/linux-logout-user-howto/
@@ -38,8 +51,8 @@ run "sudo vim /etc/systemd/system/echo_timestamp.timer"
 and add the content of ./client/timer_file.txt
 
 In order to start the service:
-- sudo systemctl daemon-reload
-- sudo systemctl start echo_timestamp.timer
+- systemctl daemon-reload
+- systemctl start echo_timestamp.timer
 
 To check if the service is running: journalctl -fu echo_timestamp.service
 
