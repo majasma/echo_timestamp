@@ -21,6 +21,7 @@ This repository contains the source code and executables for an HTTP echo server
    ```
    cat /var/log/client.log
    ```
+7. Reboot the machine. 
 
 ## Server
 
