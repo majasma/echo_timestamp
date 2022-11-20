@@ -1,6 +1,6 @@
 # HTTP Echo server and client 
 
-This repository contains the source code and executables for an HTTP echo server and client running on Ubuntu 22.04. The client script is activated every minute on the minute using systemd services. It uses curl to send an HTTP request containing a timestamp. The server echoes this back, and the client stores the body of the response in a log-file. 
+This repository contains the source code and executables for an HTTP echo server and client running on Ubuntu 22.04. The client script is activated every minute on the minute using systemd services. It uses curl to send an HTTP request containing a timestamp. The server echoes this back, and the client stores the body of the response in a log-file. Vin has been used as editor, but any other editor would work fine. 
 
 ## How to run this project?
 1. clone repo
@@ -96,6 +96,7 @@ to have it moved to /usr/local/bin. Log files are stored to /var/log/client.log
 
 ### Client
 - Curl package
+- Vim or other editor 
 
 ## The strech goal
 My plan was to implement a socket file called server_echo-http.socket and connect it with the server_echo service. Content of file:
@@ -140,3 +141,4 @@ I am unsure what causes this bug.
 - When adding a startup script, my boot process stalled forever. Lesson learned about booting in recovery mode. 
 - When using shebang on the client script, the modulo operation that used C arithmetic did not work. The shebang was necessary, so changed the modulo operation. 
 - Was not able to get the services to stop on user logout or add the server startup on connection. Tried using specific users and groups in the systemd service files. For some reason, this disables the server. 
+- If the services are started or restarted, of if the OS is booted, there will be some log entries that appear to be delayed. This is because the service has a lower priority than critical services. This could probably be fixed by dropping requests that does not have a body that contains "minute on the minute". 
