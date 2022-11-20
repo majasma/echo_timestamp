@@ -1,6 +1,6 @@
 # HTTP Echo server and client 
 
-This repository containg the source code and executables for an HTTP echo server and client running on Ubuntu 22.04. The client script is activated every minute on the minute using systemd services. It uses curl to send an HTTP request containing a timestamp. The server echoes this back, and the client stores the body of the response in a log-file. 
+This repository contains the source code and executables for an HTTP echo server and client running on Ubuntu 22.04. The client script is activated every minute on the minute using systemd services. It uses curl to send an HTTP request containing a timestamp. The server echoes this back, and the client stores the body of the response in a log-file. 
 
 ## How to run this project?
 1. clone repo
@@ -11,8 +11,8 @@ This repository containg the source code and executables for an HTTP echo server
    ```
    sudo mv -i timestamp.sh /usr/local/bin
    ```
-3. create and enable service file for client, see [link](#how-to-make-it-run-every-minute)
-4. move server executable from within the /echo_timestamp/server folder
+3. create and enable service file for the client, see [link](#how-to-make-it-run-every-minute)
+4. move the server executable from within the /echo_timestamp/server folder
    ```
    sudo mv -i echo_server /usr/local/bin
    ```
@@ -29,7 +29,7 @@ The ListenAndServe method starts a server at a given port. As the handler is set
 
 to echo it use http://localhost:port/
 
-The server is set run on localhost, if it is set up on another device use http://"ipaddr":"port"/
+The server is set to run on localhost, if it is set up on another device use http://"ipaddr":"port"/
 
 ### How to make it start at login?
 Systemd is used to run the executable at login. In order for it to run you need to add a service.
@@ -97,14 +97,6 @@ to have it moved to /usr/local/bin. Log files are stored to /var/log/client.log
 ### Client
 - Curl package
 
-
-## Challenges:
-- Was not able to figure out how launch scripts using Cron. 
-- When adding a startup script, my boot process stalled forever. Lesson learned about booting in recovery mode. 
-- When using shebang on the client script, the modulo operation I had implemented using C arithmetic did not work. The shebang was necesarry so changed the modulo operation. 
-- Was not able to get the services to stop on user logout or add the server startup on connection. Tried using specific users and groups in the systemd service files. For some reason this disables the server. 
-
-
 ## The strech goal
 My plan was to implement a socket file called server_echo-http.socket and connect it with the server_echo service. Content of file:
 
@@ -118,9 +110,8 @@ Service=server_echo.service
 [Install]
 WantedBy = sockets.target                        
 ```
-Error server_echo-http.socket: Failed with result 'service-start-limit-hit'.
-
-
+And alter the .service-file to:
+```
 [Unit]
 Description=Run the server timestamp echo service
 After=network.target server_echo-http.socket
@@ -133,3 +124,19 @@ ExecStart=/usr/local/bin/echo_server
 
 [Install]
 WantedBy=multi-user.target
+```
+
+But this gives the error:
+```Error server_echo-http.socket: Failed with result 'service-start-limit-hit'.```
+
+I am unsure what causes this bug.
+
+## Future work
+- Correct the connection-triggered service bug.
+- Correct the logout bug.
+
+## Challenges:
+- Was not able to figure out how to launch scripts using Cron. 
+- When adding a startup script, my boot process stalled forever. Lesson learned about booting in recovery mode. 
+- When using shebang on the client script, the modulo operation that used C arithmetic did not work. The shebang was necessary, so changed the modulo operation. 
+- Was not able to get the services to stop on user logout or add the server startup on connection. Tried using specific users and groups in the systemd service files. For some reason, this disables the server. 
